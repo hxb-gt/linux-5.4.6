@@ -135,7 +135,6 @@ deps_config := \
 	drivers/nvdimm/Kconfig \
 	drivers/android/Kconfig \
 	drivers/thunderbolt/Kconfig \
-	arch/x86/ras/Kconfig \
 	drivers/ras/Kconfig \
 	drivers/perf/Kconfig \
 	drivers/mcb/Kconfig \
@@ -1362,7 +1361,7 @@ endif
 ifneq "$(KERNELVERSION)" "5.4.6"
 include/config/auto.conf: FORCE
 endif
-ifneq "$(CC_VERSION_TEXT)" "arm-himix100-linux-gcc (HC&C V100R002C00B032_20190114) 6.3.0"
+ifneq "$(CC_VERSION_TEXT)" "arm-himix100-linux-gcc (HC&C V1R3C00SPC200B005_20190606) 6.3.0"
 include/config/auto.conf: FORCE
 endif
 ifneq "$(CC)" "arm-himix100-linux-gcc"

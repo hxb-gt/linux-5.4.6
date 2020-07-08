@@ -4834,10 +4834,10 @@ drop:
 	}
 
 	/* Out of window. F.e. zero window probe. */
-	if (!before(TCP_SKB_CB(skb)->seq, tp->rcv_nxt + tcp_receive_window(tp)))
+	if (!before(TCP_SKB_CB(skb)->seq, tp->rcv_nxt + tcp_receive_window(tp))) /*  窗口为0，或者失序的skb   */
 		goto out_of_window;
 
-	if (before(TCP_SKB_CB(skb)->seq, tp->rcv_nxt)) {
+	if (before(TCP_SKB_CB(skb)->seq, tp->rcv_nxt)) /*  条件满足，说明有有效的数据  */
 		/* Partial packet, seq < rcv_next < end_seq */
 		tcp_dsack_set(sk, TCP_SKB_CB(skb)->seq, tp->rcv_nxt);
 
@@ -5609,7 +5609,7 @@ void tcp_rcv_established(struct sock *sk, struct sk_buff *skb)
 			 */
 		}
 
-		if (len <= tcp_header_len) {
+		if (len <= tcp_header_len) {/*  没有数据帧  */
 			/* Bulk data transfer: sender */
 			if (len == tcp_header_len) {
 				/* Predicted packet is in window by definition.
